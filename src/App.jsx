@@ -1,4 +1,4 @@
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './containers/Home'
 import RegistrarLecturaContainer from './containers/RegistrarLecturaContainer'
 import NavBar from './components/NavBar'
@@ -8,12 +8,14 @@ function App() {
 
   return (
     <BrowserRouter>
-    <NavBar/>
-      <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/registrar' element={<RegistrarLecturaContainer/>}/>
-        <Route path='/mediciones' element={<MedicionesContainer/>}/>
-      </Routes>
+      <div className="container-fluid">
+        <NavBar />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/registrar' element={<RegistrarLecturaContainer />} />
+          <Route path='/mediciones' element={<MedicionesContainer />} />
+        </Routes>
+      </div>
     </BrowserRouter>
   )
 }
