@@ -98,7 +98,7 @@ function PanelRegistrar({ showToast = () => { }, register = () => { } }) {
                 <label htmlFor="calendar-12h" className="font-bold block mb-2">
                     Valor obtenido
                 </label>
-                <InputNumber min={0} max={500} id="valor" value={valor}
+                <InputNumber min={1} max={500} id="valor" value={valor}
                     onValueChange={(e) => setValor(e.value)} />
             </div>
             {/* Tuve que agregar el zIndex porque la renderización del Editor bugeaba todo y no podia elegir en el groupbutton xD */}

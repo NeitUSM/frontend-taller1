@@ -5,24 +5,10 @@ import { Button } from 'primereact/button';
 import { Panel } from 'primereact/panel';
 import { Dropdown } from 'primereact/dropdown';
 
-function MedicionesComponent({ registers, removeLectura = () => {} }) {
+function MedicionesComponent({ registers, removeLectura = () => { } }) {
 
-    const [medidaSeleccionada, setMedidaSeleccionada] = useState(null);
-
-    const handleRemoveLectura = (registro) => {
-        removeLectura(registro);
-    };
-
-    const accionesTemplate = (registro) => {
-        return (
-            <Button 
-                severity="warning" 
-                label="Descartar Lectura" 
-                rounded 
-                onClick={() => handleRemoveLectura(registro)} 
-            />
-        );
-    };
+    const [medidaSeleccionada, setMedidaSeleccionada] = useState(null)
+    const [filtroAplicado, setFiltroAplicado] = useState(null)
 
     const medidas = useMemo(() => {
         const nombres = registers.map(r => r.medida)
@@ -30,21 +16,30 @@ function MedicionesComponent({ registers, removeLectura = () => {} }) {
     }, [registers]);
 
     const registrosFiltrados = useMemo(() => {
-        if (!medidaSeleccionada) return registers
-        return registers.filter(r => r.medida === medidaSeleccionada)
-    }, [medidaSeleccionada, registers])
+        if (!filtroAplicado) return registers;
+        return registers.filter(r => r.medida === filtroAplicado);
+    }, [filtroAplicado, registers]);
+
+    const aplicarFiltro = () => {
+        setFiltroAplicado(medidaSeleccionada);
+    };
 
     const header = (
-        <div className="mb-3 d-flex flex-row justify-content-between">
-            <h3 className="m-0 mt-3">Lecturas Registradas</h3>
-            <Dropdown
-                value={medidaSeleccionada}
-                options={medidas}
-                onChange={(e) => setMedidaSeleccionada(e.value)}
-                placeholder="Filtrar por medida"
-                showClear
-                style={{ minWidth: '220px' }}
-            />
+        <div className="mb-3 d-flex flex-row justify-content-between align-items-center">
+            <h3 className="m-0">Lecturas Registradas</h3>
+
+            <div className="d-flex gap-2">
+                <Dropdown
+                    value={medidaSeleccionada} options={medidas} showClear
+                    onChange={(e) => {
+                        setMedidaSeleccionada(e.value);
+                        setFiltroAplicado(null);
+                    }}
+                    placeholder="Seleccionar medida" style={{ minWidth: '220px' }}
+                />
+
+                <Button label="Filtrar" icon="pi pi-search" onClick={aplicarFiltro} />
+            </div>
         </div>
     );
 
@@ -61,10 +56,19 @@ function MedicionesComponent({ registers, removeLectura = () => {} }) {
         }
     };
 
+    const accionesTemplate = (registro) => (
+        <Button
+            severity="warning"
+            label="Descartar Lectura"
+            rounded
+            onClick={() => removeLectura(registro)}
+        />
+    );
+
     return (
         <Panel>
-            <DataTable 
-                value={registrosFiltrados} 
+            <DataTable
+                value={registrosFiltrados}
                 header={header}
                 tableStyle={{ minWidth: '50rem' }}
             >
