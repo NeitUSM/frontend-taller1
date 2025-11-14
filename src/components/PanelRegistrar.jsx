@@ -6,6 +6,7 @@ import { Editor } from 'primereact/editor';
 import { InputNumber } from 'primereact/inputnumber';
 import { RadioButton } from 'primereact/radiobutton';
 import { Button } from 'primereact/button';
+import { v4 as uuidv4 } from 'uuid';
 
 function PanelRegistrar({ showToast = () => { }, register = () => { } }) {
     const medidores = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"];
@@ -50,7 +51,7 @@ function PanelRegistrar({ showToast = () => { }, register = () => { } }) {
             showToast(nuevosErrores)
             return;
         }
-        register({ dateTime, medidor, direccion, valor, medida });
+        register({id:uuidv4(), dateTime, medidor, direccion, valor, medida });
         clearInputs();
         return;
     }

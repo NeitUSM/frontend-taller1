@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './containers/Home'
 import RegistrarLecturaContainer from './containers/RegistrarLecturaContainer'
-import NavBar from './components/NavBar'
 import MedicionesContainer from './containers/MedicionesContainer'
+import NavBar from './components/Navbar'
 
 function App() {
 

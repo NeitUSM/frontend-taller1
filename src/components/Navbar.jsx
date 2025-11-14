@@ -1,19 +1,18 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { Toolbar } from 'primereact/toolbar'
 
 function NavBar() {
     const startContent = <h3>La Luuuz</h3>
     const endContent = (
         <>
-            <Link to='/'>Home</Link>
-            <Link to='/registrar'>Registro</Link>
-            <Link to='/mediciones'>Mediciones</Link>
+            <NavLink className='px-3' to='/'>Home</NavLink>
+            <NavLink className='px-3' to='/registrar'>Registro</NavLink>
+            <NavLink className='px-3' to='/mediciones'>Mediciones</NavLink>
         </>
     )
     return (
         <div>
-            <Toolbar start={startContent} end={endContent}/>
+            <Toolbar start={startContent} end={endContent} />
         </div>
     )
 }
