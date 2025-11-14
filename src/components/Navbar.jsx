@@ -2,12 +2,12 @@ import { NavLink } from 'react-router-dom'
 import { Toolbar } from 'primereact/toolbar'
 
 function NavBar() {
-    const startContent = <h3>La Luuuz</h3>
+    const startContent = <h3>SanQuinta</h3>
     const endContent = (
         <>
-            <NavLink className='px-3' to='/'>Home</NavLink>
-            <NavLink className='px-3' to='/registrar'>Registro</NavLink>
-            <NavLink className='px-3' to='/mediciones'>Mediciones</NavLink>
+            <NavLink className='px-3' to='/home'>Home</NavLink>
+            <NavLink className='px-3' to='/'>Registro</NavLink>
+            <NavLink className='px-3' to='/mediciones'>Mediciones Existentes</NavLink>
         </>
     )
     return (

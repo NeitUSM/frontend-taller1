@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import PanelRegistrar from '../components/PanelRegistrar';
+import PanelRegistrar from '../components/RegistrarComponent';
 import { Toast } from 'primereact/toast';
 import {createRegistro} from '../services/registroLectura'
 import { useNavigate } from 'react-router-dom';

@@ -1,13 +1,23 @@
 const localKey = "registro_lectura";
 
 const createRegistro = (registro) => {
-    let lista = [];
+    let registros = [];
     const data = localStorage.getItem(localKey);
     if (data != null){
-        lista = JSON.parse(data);
+        registros = JSON.parse(data);
     }
-    lista = [...lista, registro];
-    localStorage.setItem(localKey, JSON.stringify(lista));
+    registros = [...registros, registro];
+    localStorage.setItem(localKey, JSON.stringify(registros));
+}
+
+const deleteRegistro = (registro) => {
+    let registros = [];
+    const data = localStorage.getItem(localKey);
+    if (data != null){
+        registros = JSON.parse(data);
+    }
+    registros = registros.filter(r=>r.id!==registro.id);
+    localStorage.setItem(localKey, JSON.stringify(registros));
 }
 
 const getRegistros = () => {
@@ -18,8 +28,4 @@ const getRegistros = () => {
     return [];
 }
 
-const deleteAllRegistros = () => {
-    localStorage.removeItem(localKey);
-}
-
-export {createRegistro, getRegistros, deleteAllRegistros}
+export {createRegistro, deleteRegistro, getRegistros}

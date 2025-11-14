@@ -25,6 +25,21 @@ function PanelRegistrar({ showToast = () => { }, register = () => { } }) {
         setMedida('')
     }
 
+    const formatDate = (date) => {
+        const d = new Date(date)
+        const day = String(d.getDate()).padStart(2, "0")
+        const month = String(d.getMonth() + 1).padStart(2, "0")
+        const year = d.getFullYear()
+        return `${day}-${month}-${year}`
+    };
+
+    const formatTime = (date) => {
+        const d = new Date(date)
+        const hours = String(d.getHours()).padStart(2, "0")
+        const minutes = String(d.getMinutes()).padStart(2, "0")
+        return `${hours}:${minutes}`
+    };
+
     const handleClick = () => {
         const nuevosErrores = [];
         if (dateTime === null) {
@@ -51,7 +66,9 @@ function PanelRegistrar({ showToast = () => { }, register = () => { } }) {
             showToast(nuevosErrores)
             return;
         }
-        register({id:uuidv4(), dateTime, medidor, direccion, valor, medida });
+        const fecha = formatDate(dateTime);   // <-- "20-11-2025"
+        const hora  = formatTime(dateTime);
+        register({ id: uuidv4(), fecha, hora, medidor, direccion, valor, medida });
         clearInputs();
         return;
     }
@@ -63,7 +80,7 @@ function PanelRegistrar({ showToast = () => { }, register = () => { } }) {
                     Fecha y hora de la lectura
                 </label>
                 <Calendar value={dateTime} onChange={(e) => setDateTime(e.value)}
-                    showTime hourFormat="24" />
+                    showTime hourFormat="24" dateFormat="dd-mm-yy" />
             </div>
             <div className="mt-3 d-flex flex-column">
                 <label htmlFor="calendar-12h" className="font-bold block mb-2">
@@ -74,7 +91,7 @@ function PanelRegistrar({ showToast = () => { }, register = () => { } }) {
             </div>
             <div className="mt-3 d-flex flex-column">
                 <label htmlFor="calendar-12h" className="font-bold block mb-2"> Dirección </label>
-                <Editor value={direccion} onTextChange={(e) => setDireccion(e.htmlValue)}
+                <Editor value={direccion} onTextChange={(e) => setDireccion(e.textValue)}
                     style={{ height: '120px' }} />
             </div>
             <div className="mt-3 d-flex flex-column">
