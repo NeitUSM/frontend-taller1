@@ -13,12 +13,12 @@ function MedicionesComponent({ registers, removeLectura = () => { } }) {
     const medidas = useMemo(() => {
         const nombres = registers.map(r => r.medida)
         return [...new Set(nombres)].map(m => ({ label: m, value: m }))
-    }, [registers]);
+    }, [registers])
 
     const registrosFiltrados = useMemo(() => {
-        if (!filtroAplicado) return registers;
-        return registers.filter(r => r.medida === filtroAplicado);
-    }, [filtroAplicado, registers]);
+        if (!filtroAplicado) return registers
+        return registers.filter(r => r.medida === filtroAplicado)
+    }, [filtroAplicado, registers])
 
     const aplicarFiltro = () => {
         setFiltroAplicado(medidaSeleccionada);
@@ -27,17 +27,15 @@ function MedicionesComponent({ registers, removeLectura = () => { } }) {
     const header = (
         <div className="mb-3 d-flex flex-row justify-content-between align-items-center">
             <h3 className="m-0">Lecturas Registradas</h3>
-
             <div className="d-flex gap-2">
                 <Dropdown
                     value={medidaSeleccionada} options={medidas} showClear
                     onChange={(e) => {
-                        setMedidaSeleccionada(e.value);
-                        setFiltroAplicado(null);
+                        setMedidaSeleccionada(e.value)
+                        setFiltroAplicado(null)
                     }}
                     placeholder="Seleccionar medida" style={{ minWidth: '220px' }}
                 />
-
                 <Button label="Filtrar" icon="pi pi-search" onClick={aplicarFiltro} />
             </div>
         </div>
